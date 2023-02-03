@@ -3,15 +3,16 @@
 
 <head>
     <meta charset="utf-8" />
+    <link rel="stylesheet" href="css/style.css">
     <title>GSearch</title>
     <script>
         function setTitles() {
-            var heading = document.getElementById("head");
+            var heading = document.getElementById("head").firstChild;
 
             var urlParams = new URLSearchParams(window.location.search);
             var searchQuery = urlParams.get("query");
 
-            heading.innerHTML = "GSearch results for " + searchQuery;
+            heading.innerHTML = "GSearch results for '" + searchQuery + "':";
 
             searchInput = document.getElementById("searchInput");
             searchInput.value = searchQuery;
@@ -58,11 +59,15 @@
 </head>
 
 <body>
-    <h1 id="head">GSearch results</h1>
-    <form action="/search" method="GET">
+    <div id="head">
+        <h1>GSearch results</h1>
+        <a href="index.html">⌂</a>
+    </div>
+    
+    <!--<form action="/search" method="GET">
         <input id="searchInput" type="text" name="query">
         <input type="submit" value="search">
-    </form>
+    </form>-->
     <ul id="results"></ul>
 </body>
 
