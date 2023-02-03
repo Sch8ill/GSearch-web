@@ -1,0 +1,43 @@
+{
+    "query": "xyz",
+    "number_of_results": 6,
+    "timestamp": "äkdjfädjf",
+    "results": [
+        {
+            "url": "https://google.com",
+            "title": "a title",
+            "preview": "this is a very interesting website...",
+            "score": 9.55
+        },
+        {
+            "url": "https://youtube.com",
+            "title": "another title",
+            "preview": "this is also a very interesting website...",
+            "score": 6.9
+        },
+        {
+            "url": "https://github.com",
+            "title": "yet another title",
+            "preview": "yet another very interesting website...",
+            "score": 4.20
+        },
+        {
+            "url": "http://x.com",
+            "title": "yet another title",
+            "preview": "yet another very interesting website...",
+            "score": 4.21
+        },
+        {
+            "url": "https://discord.com",
+            "title": "yet another title",
+            "preview": "yet another very interesting website...",
+            "score": 4.34
+        },
+        {
+            "url": "https://chat.openai.com",
+            "title": "yet another title",
+            "preview": "yet another very interesting website...",
+            "score": 6.34
+        }
+    ]
+}

@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8" />
+    <title>GSearch</title>
+    <script>
+        function setTitles() {
+            var heading = document.getElementById("head");
+
+            var urlParams = new URLSearchParams(window.location.search);
+            var searchQuery = urlParams.get("query");
+
+            heading.innerHTML = "GSearch results for " + searchQuery;
+
+            searchInput = document.getElementById("searchInput");
+            searchInput.value = searchQuery;
+
+            return searchQuery;
+
+        }
+
+        function populateResults(searchQuery) {
+            var xhr = new XMLHttpRequest();
+            var APIURL = "http://localhost:8000/api/v1/"
+
+            xhr.open("GET", APIURL + "search?query=" + new URLSearchParams(window.location.search).get("query"));
+            xhr.onload = function () {
+                if (xhr.status === 200) {
+                    var results = JSON.parse(xhr.responseText);
+                    displayResults(results);
+                }
+            };
+            xhr.send();
+        }
+
+        function displayResults(results) {
+            var resultsList = document.getElementById("results");
+            resultsList.innerHTML = "";
+            console.log(results);
+
+            for (var i = 0; i <= results.number_of_results; i++) {
+                searchResult = results.results[i];
+                console.log(searchResult);
+
+                var resultItem = document.createElement("li");
+                resultItem.innerHTML = '<a href="' + searchResult.url + '">' + searchResult.title + '</a>';
+                resultsList.appendChild(resultItem);
+            }
+        }
+
+        function onLoad() {
+            var searchQuery = setTitles();
+            populateResults(searchQuery);
+        }
+        window.onload = onLoad;
+    </script>
+</head>
+
+<body>
+    <h1 id="head">GSearch results</h1>
+    <form action="/search" method="GET">
+        <input id="searchInput" type="text" name="query">
+        <input type="submit" value="search">
+    </form>
+    <ul id="results"></ul>
+</body>
+
+</html>
