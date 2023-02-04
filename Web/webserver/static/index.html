@@ -3,14 +3,15 @@
 
 <head>
     <meta charset="utf-8" />
+    <link rel="stylesheet" href="/static/css/style.css">
     <title>GSearch</title>
 </head>
 
 <body>
-    <h1>GSearch Home</h1>
-    <form action="/search" method="GET">
+    <h1 id="home">GSearch Home</h1>    
+    <form action="/search" method="GET" id="searchField">
         <input type="text" name="query" placeholder="Your search query">
-        <input type="submit" value="search">
+        <input type="submit" value="Search">
     </form>
 </body>
 
