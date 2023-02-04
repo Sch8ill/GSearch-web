@@ -4,8 +4,8 @@ import (
 	"errors"
 	"net/http"
 
-	"github.com/Sch8ill/GSearch/Web/logger"
-	"github.com/Sch8ill/GSearch/Web/webserver/handlers"
+	"github.com/Sch8ill/GSearch-web/logger"
+	"github.com/Sch8ill/GSearch-web/webserver/handlers"
 )
 
 

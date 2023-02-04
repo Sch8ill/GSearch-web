@@ -1,4 +1,4 @@
-module github.com/Sch8ill/GSearch/Web
+module github.com/Sch8ill/GSearch-web
 
 go 1.19
 

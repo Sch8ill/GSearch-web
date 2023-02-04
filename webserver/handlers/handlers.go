@@ -3,7 +3,7 @@ package handlers
 import (
 	"net/http"
 
-	"github.com/Sch8ill/GSearch/Web/logger"
+	"github.com/Sch8ill/GSearch-web/logger"
 )
 
 const StaticDir = "webserver/static/"
