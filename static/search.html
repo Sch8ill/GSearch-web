@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+   <head>
+      <meta charset="utf-8"/>
+      <link rel="stylesheet" href="/static/css/style.css">
+      <link rel="icon" type="image/x-icon" href="/static/img/favicon.ico">
+      <title>GSearch</title>
+      <script defer type="text/javascript" src="/static/js/footer.js"> </script>
+      <script defer type="text/javascript" src="/static/js/searchResult.js"> </script>
+   </head>
+   <body>
+      <div id="head">
+         <h1>Suchergebnisse</h1>
+         <a href="index.html">⌂</a>
+      </div>
+      <form action="/search" method="GET">
+         <input id="searchInput" type="text" name="q" placeholder="Dein Suchbefehl">
+         <input type="submit" value="suche">
+      </form>
+      <ul id="results"></ul>
+   </body>
+   <br>
+   <br>
+   <footer>
+      <p>
+         <a id="versionFooter"> </a>
+      </p>
+   </footer>
+</html>

@@ -3,29 +3,48 @@ package main
 import (
 	"errors"
 	"net/http"
+	"runtime"
+	"strconv"
 
-	"github.com/Sch8ill/GSearch-web/logger"
-	"github.com/Sch8ill/GSearch-web/webserver/handlers"
+	"github.com/rs/zerolog/log"
+
+	"github.com/sch8ill/gsearch-web/config"
+	"github.com/sch8ill/gsearch-web/db"
+	"github.com/sch8ill/gsearch-web/handlers"
+	"github.com/sch8ill/gsearch-web/logger"
 )
 
-
-
 func main() {
-	logger.Logger.Info().Msg("Webserver starting...")
+	logger.CreateLogger(config.LogLevel)
+	log.Info().Msg("GSearch-web starting...")
+	log.Info().Msg("Golang version:\t " + runtime.Version())
+	log.Info().Msg("GSearch version:\t GSearch-web@" + config.Version)
+	log.Info().Msg("MongodbURI:\t\t " + config.MongodbURI)
 
-	http.HandleFunc("/", handlers.Home)
-	http.HandleFunc("/search", handlers.Search)
-	http.HandleFunc("/api/v1/search", handlers.SearchAPI)
+	bindAddr := config.IP + ":" + strconv.FormatInt(int64(config.Port), 10)
+	log.Info().Msg("Server addr:\t " + bindAddr)
 
-	http.Handle("/static/css/", http.StripPrefix("/static/css", http.FileServer(http.Dir(handlers.StaticDir + "css/"))))
+	registerRoutes()
+	
+	handlers.DB = db.New(config.MongodbURI)
+	handlers.DB.Connect()
 
-	err := http.ListenAndServe("localhost:8000", nil)
+	err := http.ListenAndServe(bindAddr, nil)
 
 	// error handling
 	if errors.Is(err, http.ErrServerClosed) {
-		logger.Logger.Info().Msg("Webserver shut down.")
+		log.Fatal().Msg("Webserver shut down.")
 
 	} else if err != nil {
-		logger.Logger.Error().Err(err).Msg("")
+		logger.LogError(err)
 	}
+}
+
+func registerRoutes() {
+	http.HandleFunc("/", handlers.Home)
+	http.HandleFunc("/search", handlers.Search)
+	http.HandleFunc("/api/search", handlers.SearchAPI)
+	http.HandleFunc("/api/version", handlers.VersionAPI)
+
+	http.HandleFunc("/static/", handlers.StaticFile)
 }
